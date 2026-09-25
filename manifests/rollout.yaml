@@ -21,6 +21,25 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+        - name: nginx-exporter
+          image: nginx/nginx-prometheus-exporter:1.3.0
+          args:
+            - --nginx.scrape-uri=http://localhost/nginx_status
+          ports:
+            - containerPort: 9113
+              name: metrics
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-sidecar-config
   strategy:
     canary:
       canaryService: juice-shop-v2
@@ -32,6 +51,12 @@ spec:
             namespace: default
       steps:
         - setWeight: 10
+        - analysis:
+            templates:
+              - templateName: success-rate
+            args:
+              - name: service-name
+                value: juice-shop-v2
         - pause: {duration: 60}
         - setWeight: 50
         - pause: {duration: 60}

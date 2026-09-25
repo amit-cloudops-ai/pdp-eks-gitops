@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+spec:
+  args:
+    - name: service-name
+  metrics:
+    - name: success-rate
+      interval: 20s
+      successCondition: result[0] >= 0.1
+      failureLimit: 2
+      provider:
+        prometheus:
+          address: http://kube-prometheus-kube-prome-prometheus.monitoring:9090
+          query: |
+            sum(rate(nginx_http_requests_total{service="{{args.service-name}}"}[1m]))

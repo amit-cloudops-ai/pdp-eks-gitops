@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: juice-shop
+  labels:
+    release: kube-prometheus
+spec:
+  selector:
+    matchLabels:
+      app: juice-shop
+  endpoints:
+    - port: metrics
+      interval: 15s

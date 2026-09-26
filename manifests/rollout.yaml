@@ -3,6 +3,7 @@ kind: Rollout
 metadata:
   name: juice-shop
 spec:
+  progressDeadlineSeconds: 60
   replicas: 2
   selector:
     matchLabels:
@@ -12,6 +13,7 @@ spec:
       labels:
         app: juice-shop
     spec:
+  progressDeadlineSeconds: 60
       containers:
         - name: juice-shop
           image: bkimminich/juice-shop:v99-broken

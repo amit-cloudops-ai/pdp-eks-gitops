@@ -10,6 +10,7 @@ spec:
       interval: 20s
       successCondition: result[0] >= 0.1
       failureLimit: 2
+      count: 5
       provider:
         prometheus:
           address: http://kube-prometheus-kube-prome-prometheus.monitoring:9090

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: juice-shop
-          image: bkimminich/juice-shop:v99-broken
+          image: bkimminich/juice-shop:v20.0.0
           ports:
             - containerPort: 3000
           resources:

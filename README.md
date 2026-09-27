@@ -81,6 +81,28 @@ aws eks update-kubeconfig --name pdp-eks-cluster --region us-east-1
 #    manifests/ai-copilot.yaml + ai-copilot-externalsecret.yaml
 ```
 
+## Screenshots
+
+**GitOps in action — ArgoCD synced and healthy**
+![ArgoCD](docs/screenshots/argocd-app.png)
+
+**Progressive delivery — Argo Rollouts dashboard**
+![Argo Rollouts Dashboard](docs/screenshots/argo-rollouts-dashboard.png)
+
+**Canary release history — multiple real rollouts, not a one-off**
+![Rollout history](docs/screenshots/rollout-history.png)
+
+**Weighted canary traffic split, live — 20 requests split between stable and canary versions**
+![Canary traffic split](docs/screenshots/canary-traffic-split.png)
+
+**Real AWS infrastructure — VPC Lattice service with a live DNS entry**
+![VPC Lattice](docs/screenshots/vpc-lattice-service.png)
+
+**The target application, live**
+![Juice Shop](docs/screenshots/juice-shop-live.png)
+
+**Observability — Alertmanager routing real alerts to Slack**
+![Slack alerts](docs/screenshots/slack-alerts.png)
 
 
 ## Tech stack

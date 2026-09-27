@@ -1,0 +1,69 @@
+<svg width="900" height="640" viewBox="0 0 900 640" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="640" fill="#0f172a"/>
+
+  <!-- Users -->
+  <rect x="380" y="20" width="140" height="44" rx="8" fill="#334155" stroke="#64748b"/>
+  <text x="450" y="47" text-anchor="middle" fill="#f1f5f9" font-size="14">Users</text>
+  <line x1="450" y1="64" x2="450" y2="98" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- EKS cluster container -->
+  <rect x="60" y="98" width="780" height="330" rx="16" fill="none" stroke="#0ea5e9" stroke-width="1.5"/>
+  <text x="80" y="122" fill="#38bdf8" font-size="13" font-weight="bold">EKS Cluster (Karpenter-scaled nodes)</text>
+
+  <!-- Gateway API -->
+  <rect x="90" y="140" width="200" height="56" rx="10" fill="#7c3aed" opacity="0.85"/>
+  <text x="190" y="162" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">Gateway API</text>
+  <text x="190" y="180" text-anchor="middle" fill="#ede9fe" font-size="11">VPC Lattice canary split</text>
+
+  <!-- App pods -->
+  <rect x="450" y="140" width="200" height="56" rx="10" fill="#7c3aed" opacity="0.85"/>
+  <text x="550" y="162" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">Juice Shop v1 / v2</text>
+  <text x="550" y="180" text-anchor="middle" fill="#ede9fe" font-size="11">Managed by Argo Rollouts</text>
+  <line x1="290" y1="168" x2="448" y2="168" stroke="#a78bfa" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ArgoCD -->
+  <rect x="90" y="222" width="200" height="56" rx="10" fill="#ea580c" opacity="0.85"/>
+  <text x="190" y="244" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">ArgoCD</text>
+  <text x="190" y="262" text-anchor="middle" fill="#ffedd5" font-size="11">GitOps sync from Git</text>
+  <line x1="190" y1="222" x2="190" y2="196" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- External Secrets -->
+  <rect x="450" y="222" width="200" height="56" rx="10" fill="#ea580c" opacity="0.85"/>
+  <text x="550" y="244" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">External Secrets</text>
+  <text x="550" y="262" text-anchor="middle" fill="#ffedd5" font-size="11">Pulls from Secrets Manager</text>
+  <line x1="550" y1="222" x2="550" y2="196" stroke="#fb923c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Git repo -->
+  <rect x="90" y="304" width="200" height="50" rx="10" fill="#334155" stroke="#64748b"/>
+  <text x="190" y="333" text-anchor="middle" fill="#f1f5f9" font-size="12">Git repo (source of truth)</text>
+  <line x1="190" y1="304" x2="190" y2="278" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Observability -->
+  <rect x="330" y="304" width="220" height="56" rx="10" fill="#059669" opacity="0.85"/>
+  <text x="440" y="326" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">Prometheus / Grafana / Loki</text>
+  <text x="440" y="344" text-anchor="middle" fill="#d1fae5" font-size="11">Watches everything above</text>
+  <line x1="550" y1="304" x2="500" y2="304" stroke="#34d399" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Alertmanager -->
+  <rect x="330" y="380" width="220" height="50" rx="10" fill="#059669" opacity="0.85"/>
+  <text x="440" y="409" text-anchor="middle" fill="#fff" font-size="12">Alertmanager</text>
+  <line x1="440" y1="380" x2="440" y2="360" stroke="#34d399" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- AI Copilot -->
+  <rect x="600" y="380" width="200" height="50" rx="10" fill="#059669" opacity="0.85"/>
+  <text x="700" y="409" text-anchor="middle" fill="#fff" font-size="12">AI Incident Copilot</text>
+  <line x1="550" y1="405" x2="598" y2="405" stroke="#34d399" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Slack -->
+  <rect x="600" y="460" width="200" height="50" rx="10" fill="#1d4ed8" opacity="0.85"/>
+  <text x="700" y="489" text-anchor="middle" fill="#fff" font-size="12">Slack (#all-pdp-demo)</text>
+  <line x1="700" y1="460" x2="700" y2="430" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text x="30" y="620" fill="#64748b" font-size="11">Progressive Delivery Platform on EKS — Amit P M</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+</svg>

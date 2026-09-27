@@ -1,0 +1,34 @@
+# Apply with:
+#   helm upgrade kube-prometheus prometheus-community/kube-prometheus-stack \
+#     --namespace monitoring --reuse-values --timeout 3m \
+#     -f alertmanager-with-copilot-values.yaml
+#
+# Routes every alert except the built-in Watchdog health-check to the
+# AI Copilot service, which enriches it and posts the AI-generated
+# summary to Slack itself. The plain slack-notifications receiver is
+# kept for manual/test alerts.
+
+alertmanager:
+  config:
+    route:
+      receiver: 'ai-copilot'
+      group_by: ['alertname']
+      group_wait: 10s
+      group_interval: 5m
+      repeat_interval: 3h
+      routes:
+        - receiver: 'null'
+          matchers:
+            - alertname = "Watchdog"
+    receivers:
+      - name: 'null'
+      - name: 'slack-notifications'
+        slack_configs:
+          - api_url: 'REPLACE_WITH_YOUR_SLACK_WEBHOOK_URL'
+            send_resolved: true
+            title: '{{ .CommonAnnotations.summary }}'
+            text: '{{ .CommonAnnotations.description }}'
+      - name: 'ai-copilot'
+        webhook_configs:
+          - url: 'http://ai-copilot.default.svc.cluster.local:8080/webhook'
+            send_resolved: true

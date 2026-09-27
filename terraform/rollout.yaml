@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: juice-shop
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: juice-shop
+  template:
+    metadata:
+      labels:
+        app: juice-shop
+    spec:
+      containers:
+        - name: juice-shop
+          image: bkimminich/juice-shop:v19.0.0
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+  strategy:
+    canary:
+      canaryService: juice-shop-v2
+      stableService: juice-shop-v1
+      trafficRouting:
+        plugins:
+          argoproj-labs/gatewayAPI:
+            httpRoute: juice-shop-route
+            namespace: default
+      steps:
+        - setWeight: 10
+        - pause: {duration: 60}
+        - setWeight: 50
+        - pause: {duration: 60}
+        - setWeight: 100

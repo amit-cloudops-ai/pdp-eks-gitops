@@ -1,0 +1,17 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: juice-shop-route
+spec:
+  parentRefs:
+    - name: juice-shop-gateway
+  rules:
+    - backendRefs:
+        - name: juice-shop-v1
+          kind: Service
+          port: 80
+          weight: 90
+        - name: juice-shop-v2
+          kind: Service
+          port: 80
+          weight: 10

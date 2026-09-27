@@ -1,0 +1,44 @@
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  amiFamily: AL2023
+  role: Karpenter-pdp-eks-cluster
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: pdp-eks-cluster
+  securityGroupSelectorTerms:
+    - tags:
+        kubernetes.io/cluster/pdp-eks-cluster: owned
+---
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: default
+spec:
+  template:
+    spec:
+      requirements:
+        - key: karpenter.k8s.aws/instance-family
+          operator: In
+          values: ["t3", "t4g"]
+        - key: karpenter.k8s.aws/instance-size
+          operator: In
+          values: ["micro", "small"]
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64", "arm64"]
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["on-demand"]
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: default
+  limits:
+    cpu: "8"
+    memory: 16Gi
+  disruption:
+    consolidationPolicy: WhenEmptyOrUnderutilized
+    consolidateAfter: 60s

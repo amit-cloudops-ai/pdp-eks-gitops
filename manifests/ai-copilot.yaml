@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-copilot
+  labels:
+    app: ai-copilot
+spec:
+  # Scaled to 0 until the image is built and pushed to ECR (see ai-copilot/README
+  # or the main repo README for build steps). The full source, Dockerfile, and
+  # K8s manifests are complete and ready — this is deliberately not live yet.
+  replicas: 0
+  selector:
+    matchLabels:
+      app: ai-copilot
+  template:
+    metadata:
+      labels:
+        app: ai-copilot
+    spec:
+      containers:
+        - name: ai-copilot
+          image: REPLACE_WITH_YOUR_ECR_IMAGE_URI:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: ai-copilot-secrets
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-copilot
+spec:
+  selector:
+    app: ai-copilot
+  ports:
+    - port: 8080
+      targetPort: 8080

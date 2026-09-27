@@ -81,9 +81,7 @@ aws eks update-kubeconfig --name pdp-eks-cluster --region us-east-1
 #    manifests/ai-copilot.yaml + ai-copilot-externalsecret.yaml
 ```
 
-## Demo
 
-*(Add your screen recording link here — the automated rollback sequence and the AI Copilot's Slack message are the two moments worth showing.)*
 
 ## Tech stack
 
